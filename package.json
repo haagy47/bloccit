@@ -11,8 +11,8 @@
   "author": "Emily Haag",
   "license": "ISC",
   "engines": {
-    "node": "5.0.0",
-    "npm": "8.11.3"
+    "node": "8.11.3",
+    "npm": "6.2.0"
   },
   "devDependencies": {
     "jasmine": "^3.0.0",
