@@ -7,11 +7,13 @@
     "test": "export NODE_ENV=test && jasmine",
     "start": "node src/server.js"
   },
-  "keywords": [
-    "bloccit"
-  ],
+  "keywords": "bloccit",
   "author": "Emily Haag",
   "license": "ISC",
+  "engines": {
+    "node": "5.0.0",
+    "npm": "8.11.3"
+  },
   "devDependencies": {
     "jasmine": "^3.0.0",
     "request": "^2.83.0"
@@ -19,9 +21,5 @@
   "dependencies": {
     "dotenv": "^5.0.0",
     "express": "^4.16.2"
-  },
-  "engines": {
-    "node": "5.0.0",
-    "npm": "8.11.3"
-  },
+  }
 }
