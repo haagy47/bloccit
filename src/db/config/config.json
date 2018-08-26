@@ -25,6 +25,6 @@
     "dialect": "postgres",
     "logging": false,
     "operatorsAliases": false,
-    "use_env_variable": "postgres://qthiyednzmyotb:29e73182d9fddffcae4f696b895671212a4bee30160b471613409d396e10a189@ec2-54-225-92-1.compute-1.amazonaws.com:5432/d1jp4esv2d5gkq"
+    "use_env_variable": "postgresql-curved-78113"
   }
 }
