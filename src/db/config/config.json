@@ -25,6 +25,6 @@
     "dialect": "postgres",
     "logging": false,
     "operatorsAliases": false,
-    "use_env_variable": "postgresql-curved-78113"
+    "use_env_variable": "postgresql-flat-26521"
   }
 }
