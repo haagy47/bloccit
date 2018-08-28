@@ -66,12 +66,13 @@ describe("Topic", () => {
    });
   describe("#getPosts()", () => {
 
-    it("should return the associated posts", (done) => {
+    it("should return an array of posts associated with topic", (done) => {
 
       this.topic.getPosts()
       .then((associatedPosts) => {
-        expect(associatedPosts.title).toBe("My first visit to Proxima Centauri b");
-        expect(associatedPosts.body).toBe("I saw some rocks.");
+        expect(associatedPosts[0].title).toBe("My first visit to Proxima Centauri b");
+        expect(associatedPosts[0].body).toBe("I saw some rocks.");
+        expect(associatedPosts[0].topicId).toBe(this.topic.id);
         done();
       });
 
