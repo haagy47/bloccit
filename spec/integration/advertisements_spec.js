@@ -22,7 +22,6 @@ describe("routes : advertisements", () => {
           console.log(err);
           done();
         });
-
       });
 
   });
