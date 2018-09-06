@@ -31,29 +31,29 @@ describe("routes : topics", () => {
    //context of admin user
    describe("admin user performing CRUD actions for Topic", () => {
 
-         beforeEach((done) => {
-           User.create({
-             email: "admin@example.com",
-             password: "123456",
-             role: "admin"
-           })
-           .then((user) => {
-             request.get({         // mock authentication
-               url: "http://localhost:3000/auth/fake",
-               form: {
-                 role: user.role,     // mock authenticate as admin user
-                 userId: user.id,
-                 email: user.email
-               }
-             },
-               (err, res, body) => {
-                 done();
-               }
-             );
-           });
+      beforeEach((done) => {
+         User.create({
+           email: "admin@example.com",
+           password: "123456",
+           role: "admin"
+         })
+         .then((user) => {
+           request.get({         // mock authentication
+             url: "http://localhost:3000/auth/fake",
+             form: {
+               role: user.role,     // mock authenticate as admin user
+               userId: user.id,
+               email: user.email
+             }
+           },
+             (err, res, body) => {
+               done();
+             }
+           );
          });
+      });
 
-     describe("GET /topics", () => {
+      describe("GET /topics", () => {
         it("should respond with all topics", (done) => {
           request.get(base, (err, res, body) => {
             expect(err).toBeNull();
@@ -72,7 +72,7 @@ describe("routes : topics", () => {
             done();
           });
         });
-     });
+      });
 
       describe("POST /topics/create", () => {
         const options = {
@@ -104,14 +104,14 @@ describe("routes : topics", () => {
       });
 
       describe("GET /topics/:id", () => {
-       it("should render a view with the selected topic", (done) => {
-        request.get(`${base}${this.topic.id}`, (err, res, body) => {
-          expect(err).toBeNull();
-          expect(body).toContain("JS Frameworks");
-          done();
+        it("should render a view with the selected topic", (done) => {
+          request.get(`${base}${this.topic.id}`, (err, res, body) => {
+            expect(err).toBeNull();
+            expect(body).toContain("JS Frameworks");
+            done();
+          });
         });
       });
-    });
 
       describe("POST /topics/:id/destroy", () => {
         it("should delete the topic with the associated ID", (done) => {
@@ -137,8 +137,6 @@ describe("routes : topics", () => {
         });
       });
 
-
-
       describe("GET /topics/:id/edit", () => {
         it("should render a view with an edit topic form", (done) => {
           request.get(`${base}${this.topic.id}/edit`, (err, res, body) => {
@@ -149,7 +147,6 @@ describe("routes : topics", () => {
           });
         });
       });
-
 
       describe("POST /topics/:id/update", () => {
 
@@ -178,27 +175,25 @@ describe("routes : topics", () => {
 
       });
 
-    })
+    });
 
      //end context for admin user
 
-
-
      // context of member user
-       describe("member user performing CRUD actions for Topic", () => {
+   describe("member user performing CRUD actions for Topic", () => {
 
-         beforeEach((done) => {
-           request.get({
-             url: "http://localhost:3000/auth/fake",
-             form: {
-               role: "member"
-             }
-           },
-             (err, res, body) => { //did not remove at refactoring
-               done();
-             }
-           );
-         });
+      beforeEach((done) => {
+       request.get({
+         url: "http://localhost:3000/auth/fake",
+         form: {
+           role: "member"
+         }
+       },
+         (err, res, body) => {
+           done();
+         }
+       );
+      });
 
       describe("GET /topics", () => {
         it("should respond with all topics", (done) => {
@@ -209,7 +204,7 @@ describe("routes : topics", () => {
             done();
           });
         });
-       });
+      });
 
       describe("GET /topics/new", () => {
         it("should redirect to topics view", (done) => {
@@ -219,7 +214,7 @@ describe("routes : topics", () => {
             done();
           });
         });
-       });
+      });
 
       describe("POST /topics/create", () => {
         const options = {
@@ -280,8 +275,6 @@ describe("routes : topics", () => {
         });
       });
 
-
-
       describe("GET /topics/:id/edit", () => {
         it("should not render a view with an edit topic form", (done) => {
           request.get(`${base}${this.topic.id}/edit`, (err, res, body) => {
@@ -314,7 +307,8 @@ describe("routes : topics", () => {
                done();
              });
            });
-          });
-         });
-       });
-     });
+        });
+      });
+
+   });
+});
