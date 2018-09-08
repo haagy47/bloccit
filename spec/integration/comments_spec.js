@@ -200,8 +200,83 @@ describe("routes : comments", () => {
 
        });
 
+       it("should delete the comment with the associated ID", (done) => { //assignment
+        request.get({           // mock authentication
+           url: "http://localhost:3000/auth/fake",
+           form: {
+             role: "member",
+             userId: 2 // new user id
+            }
+           },
+           (err, res, body) => {
+             done();
+           }
+        );
+         Comment.all()
+         .then((comments) => {
+           const commentCountBeforeDelete = comments.length;
+
+           expect(commentCountBeforeDelete).toBe(1);
+
+           request.post(
+            `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
+             (err, res, body) => {
+             Comment.all()
+             .then((comments) => {
+               expect(err).toBeNull();
+               expect(comments.length).toBe(commentCountBeforeDelete);
+               done();
+             })
+
+           });
+         })
+
+       });
+
      });
 
    }); //end context for signed in user
+
+  describe("admin user performing CRUD actions for Comment", () => {
+
+      beforeEach((done) => {
+        request.get({
+          url: "http://localhost:3000/auth/fake",
+          form: {
+            role: "admin",
+            userId: 2
+          }
+        },
+         (err, res, body) => {
+           done();
+         }
+       );
+     });
+
+     describe("POST /topics/:topicId/posts/:postId/comments/:id/destroy", () => {
+
+       it("should delete a member user's comment", (done) => {
+         Comment.all()
+         .then((comments) => {
+           const commentCountBeforeDelete = comments.length;
+
+           expect(commentCountBeforeDelete).toBe(1);
+
+           request.post(
+             `${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`,
+             (err, res, body) => {
+             Comment.all()
+             .then((comments) => {
+               expect(err).toBeNull();
+               expect(comments.length).toBe(commentCountBeforeDelete - 1);
+               done();
+             })
+
+           });
+         })
+       });
+     });
+
+  }); //end context for admin user
 
 });
