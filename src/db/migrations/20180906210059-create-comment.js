@@ -29,7 +29,7 @@ module.exports = {
          key: "id",
          as: "postId"
         }
-       },
+      },
       userId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
