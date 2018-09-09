@@ -141,6 +141,34 @@ describe("routes : votes", () => {
           }
         );
       });
+
+      it("should not create a vote with a value of anything other than 1", (done) => {
+        const options = {
+          url: `${base}${this.topic.id}/posts/${this.post.id}/votes/upvote`
+        };
+        request.get(options,
+          (err, res, body) => {
+            Vote.findOne({
+              where: {
+                userId: this.user.id,
+                postId: this.post.id,
+                value: 2
+              }
+            })
+            .then((vote) => {               // confirm that an upvote was not created
+              expect(vote).toBeNull();
+              expect(vote.userId).toBe(this.user.id);
+              expect(vote.postId).toBe(this.post.id);
+              done();
+            })
+            .catch((err) => {
+              console.log(err);
+              done();
+            });
+          }
+        );
+      });
+
     });
 
     describe("GET /topics/:topicId/posts/:postId/votes/downvote", () => {
@@ -171,6 +199,34 @@ describe("routes : votes", () => {
           }
         );
       });
+
+      it("should not create a vote with a value of anything other than -1", (done) => {
+        const options = {
+          url: `${base}${this.topic.id}/posts/${this.post.id}/votes/upvote`
+        };
+        request.get(options,
+          (err, res, body) => {
+            Vote.findOne({
+              where: {
+                userId: this.user.id,
+                postId: this.post.id,
+                value: -2
+              }
+            })
+            .then((vote) => {               // confirm that an upvote was not created
+              expect(vote).toBeNull();
+              expect(vote.userId).toBe(this.user.id);
+              expect(vote.postId).toBe(this.post.id);
+              done();
+            })
+            .catch((err) => {
+              console.log(err);
+              done();
+            });
+          }
+        );
+      });
+
     });
 
   }); //end context for signed in user
